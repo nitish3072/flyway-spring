@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error">
+<Appenders>
+    <RollingFile name="file-log" fileName="${LOG_DIR}/db-migration-${date:yyyy-MM-dd}.log"
+      filePattern="${LOG_DIR}/db-migration-%d{yyyy-MM-dd}.log.gz">
+        <PatternLayout>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </PatternLayout>
+        <Policies>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        </Policies>
+    </RollingFile>
+
+    <Console name="console" target="SYSTEM_OUT">
+        <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+    </Console>
+</Appenders>
+<Loggers>
+    <Logger name="com.nitish" level="error" additivity="false">
+        <appender-ref ref="file-log" level="error"/>
+        <appender-ref ref="console" level="error"/>
+    </Logger>
+    <Root level="error" additivity="false">
+        <appender-ref ref="console"/>
+    </Root>
+</Loggers>
+</Configuration>
+
